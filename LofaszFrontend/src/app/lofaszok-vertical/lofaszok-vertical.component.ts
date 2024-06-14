@@ -39,4 +39,8 @@ export class LofaszokVerticalComponent {
       }
     })
   }
+
+  deleteLofasz(lofasz: Lofasz): void{
+    this.store.dispatch(LofaszAction.deleteLofaszById({id: lofasz.id}));
+  }
 }
