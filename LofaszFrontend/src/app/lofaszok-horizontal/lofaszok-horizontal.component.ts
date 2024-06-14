@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, every, first, single, take } from 'rxjs';
 import { Store } from '@ngrx/store';
 import { LofaszAction } from '../../sdk/lofasz/lofasz.action';
 import { CommonModule, NgFor } from '@angular/common';
@@ -17,9 +17,27 @@ import { Lofasz } from '../../sdk/lofasz/lofasz.model';
 export class LofaszokHorizontalComponent {
 
     lofaszok$: Observable<Lofasz[]>;
+    isBusy$: Observable<boolean>;
+    store: Store<AppState>;
+    selectedLofasz$: Observable<Lofasz | null>;
 
     constructor(store: Store<AppState>) {
-      this.lofaszok$ = store.select((state) => state.lofasz.lofaszok);
+      this.store = store;
+      this.lofaszok$ = store.select(state => state.lofasz.lofaszok);
+      this.isBusy$ = store.select(state => state.lofasz.isBusy);
+      this.selectedLofasz$ = store.select(state => state.lofasz.selectedLofasz);
+
       store.dispatch(LofaszAction.getAllLofasz());
+    }
+
+    handleClick(lofasz: Lofasz): void {
+      this.selectedLofasz$.pipe(first()).subscribe(currentlySelectedLofasz => {
+        if (currentlySelectedLofasz === null || currentlySelectedLofasz != lofasz) {
+          this.store.dispatch(LofaszAction.selectLofasz({lofasz: lofasz}));
+        }
+        else {
+          this.store.dispatch(LofaszAction.selectLofasz({lofasz: null}));
+        }
+      })
     }
 }

@@ -8,6 +8,7 @@ import { lofaszReducer } from '../sdk/lofasz/lofasz.reducer';
 import { LofaszService } from '../sdk/lofasz/lofasz.service';
 import { appEffects, appStore } from '../sdk/store';
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -16,6 +17,7 @@ export const appConfig: ApplicationConfig = {
     provideHttpClient(),
     provideStore(appStore),
     provideEffects(appEffects),
-    LofaszService
+    LofaszService,
+    ReactiveFormsModule 
   ]
 };

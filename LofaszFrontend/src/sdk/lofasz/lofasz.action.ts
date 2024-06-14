@@ -4,6 +4,8 @@ import { Lofasz } from "./lofasz.model";
 
 export namespace LofaszAction {
 
+    export const selectLofasz = createAction("Select a lofasz!", props<{ lofasz: Lofasz | null }>());
+
     export const getAllLofasz = createAction("Get all the lofasz!");
     export const getAllLofaszFailure = createAction('Failed at getting all the lofaszok!', props<{ error: any }>());
     export const getAllLofaszSuccess = createAction('Successfully getting all the lofaszok!', props<{ lofaszok: Lofasz[] }>());

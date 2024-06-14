@@ -1,0 +1,27 @@
+
+<h2>Lófasz {{ (selectedLofasz$ | async) ? 'szerkesztő' : "kreáló" }}!</h2>
+
+<form [formGroup]="lofaszForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Name</label>
+      <input id="name" formControlName="name" />
+      <div *ngIf="name?.invalid && (name?.dirty || name?.touched)">
+        <div *ngIf="name?.errors?.['required']">Name is required.</div>
+        <div *ngIf="name?.errors?.['minlength']">Name must be at least 3 characters long.</div>
+      </div>
+    </div>
+  
+    <div>
+      <label for="isFriendly">Email</label>
+      <input id="isFriendly" formControlName="isFriendly" type="checkbox" />
+      <div *ngIf="isFriendly?.invalid && (isFriendly?.dirty || isFriendly?.touched)">
+        <div *ngIf="isFriendly?.errors?.['required']">Email is required.</div>
+        <div *ngIf="isFriendly?.errors?.['email']">Email must be a valid email address.</div>
+      </div>
+    </div>
+  
+      <input id="id" formControlName="id" type="hidden" />
+      
+  
+    <button type="submit" [disabled]="lofaszForm.invalid">Submit</button>
+  </form>

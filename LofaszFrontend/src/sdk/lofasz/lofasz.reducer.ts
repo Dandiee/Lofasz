@@ -7,16 +7,20 @@ export interface LofaszState {
   lofaszok: Lofasz[];
   isBusy: boolean;
   error: string;
+  selectedLofasz: Lofasz | null;
   }
 
   export const initialState: LofaszState = {
     lofaszok: [],
     isBusy: false,
-    error: ''
+    error: '',
+    selectedLofasz: null
     };
 
 export const lofaszReducer = createReducer(
   initialState,
+
+  on(LofaszAction.selectLofasz, (state, {lofasz}) => ({ ...state, selectedLofasz: lofasz})),
 
   on(LofaszAction.getAllLofasz, state => ({ ...state, isBusy: true})),
   on(LofaszAction.getAllLofaszSuccess, (state, {lofaszok}) => ({ ...state, lofaszok, isBusy: false })),
