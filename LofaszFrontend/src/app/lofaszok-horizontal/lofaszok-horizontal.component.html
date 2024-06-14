@@ -1,1 +1,8 @@
 <p>lofaszok-horizontal works!</p>
+
+
+<ul>
+  <li *ngFor="let lofasz of lofaszok$ | async">
+    {{ lofasz.name }}
+  </li>
+</ul>

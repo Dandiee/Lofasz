@@ -1,11 +1,7 @@
 import { Guid } from "guid-typescript";
 
-export interface LofaszState {
- id: Guid,
+export interface Lofasz {
+ id: number,
  name: string,
  isFriendly: boolean
 }
-
-export interface LofaszokState {
-  lofaszok: LofaszState[]
- }

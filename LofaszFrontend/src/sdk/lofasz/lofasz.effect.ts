@@ -1,6 +1,5 @@
 import { Action, createAction, props } from "@ngrx/store";
 import { Guid } from "guid-typescript";
-import { LofaszState } from "./lofasz.model";
 import { Injectable } from "@angular/core";
 import { Observable, of, pipe, switchMap } from "rxjs";
 import { catchError, map, mergeMap } from "rxjs/operators";
@@ -10,7 +9,7 @@ import { LofaszService } from "./lofasz.service";
 
 
 @Injectable()
-export class EntityEffect {
+export class LofaszEffects {
 
     constructor(private actions$: Actions, private lofaszService: LofaszService) {}
 
@@ -19,8 +18,8 @@ export class EntityEffect {
             ofType(LofaszAction.getAllLofasz),
             mergeMap(() => this.lofaszService.getLofaszok()
                 .pipe(
-                    map(kupacLofasz => LofaszAction.getAllLofaszSuccess({ lofaszok: kupacLofasz })),
-                    catchError(error => of(LofaszAction.getAllLofaszFailure({ error })))
+                    map((lofaszok) => LofaszAction.getAllLofaszSuccess({ lofaszok })),
+                    catchError((error) => of(LofaszAction.getAllLofaszFailure({ error: error.message })))
                 )
             )
         )
