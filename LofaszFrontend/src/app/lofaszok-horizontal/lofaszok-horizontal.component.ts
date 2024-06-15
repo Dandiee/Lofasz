@@ -16,23 +16,24 @@ import { LofaszActions } from '../../sdk/lofasz/lofasz.action';
 export class LofaszokHorizontalComponent {
   lofaszok$: Observable<Lofasz[]>;
   isBusy$: Observable<boolean>;
-  selectedLofasz$: Observable<Lofasz | null>;
+  selectedLofaszId$: Observable<number | null>;
 
   constructor(private store: Store<AppState>) {
     this.lofaszok$ = store.select(state => state.lofasz.lofaszok);
     this.isBusy$ = store.select(state => state.lofasz.isBusy);
-    this.selectedLofasz$ = store.select(state => state.lofasz.selectedLofasz);
+    this.selectedLofaszId$ = store.select(state => state.lofasz.selectedLofaszId);
   }
 
   handleClick(lofasz: Lofasz): void {
-    this.selectedLofasz$.pipe(first()).subscribe(currentlySelectedLofasz => {
+    this.selectedLofaszId$.pipe(first()).subscribe(currentlySelectedLofaszId => {
+
       if (
-        currentlySelectedLofasz === null ||
-        currentlySelectedLofasz != lofasz
+        currentlySelectedLofaszId === null ||
+        currentlySelectedLofaszId != lofasz.id
       ) {
-        this.store.dispatch(LofaszActions.selectLofasz({ lofasz: lofasz }));
+        this.store.dispatch(LofaszActions.selectLofasz({ lofaszId: lofasz.id }));
       } else {
-        this.store.dispatch(LofaszActions.selectLofasz({ lofasz: null }));
+        this.store.dispatch(LofaszActions.selectLofasz({ lofaszId: null }));
       }
     });
   }

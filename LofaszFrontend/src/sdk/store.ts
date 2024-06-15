@@ -15,7 +15,7 @@ export interface LofaszState {
   lofaszok: Lofasz[];
   isBusy: boolean;
   error: string;
-  selectedLofasz: Lofasz | null;
+  selectedLofaszId: number | null;
 }
 
 export const appStore: AppStore = {

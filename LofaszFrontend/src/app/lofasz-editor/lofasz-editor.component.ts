@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Store, select } from '@ngrx/store';
+import { Store } from '@ngrx/store';
 import { LofaszActions } from '../../sdk/lofasz/lofasz.action';
 import { CommonModule, NgFor } from '@angular/common';
 import { AppState } from '../../sdk/store';
@@ -11,6 +11,7 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { LofaszSelectors } from '../../sdk/lofasz/lofasz.selector';
 
 @Component({
   selector: 'app-lofasz-editor',
@@ -21,7 +22,7 @@ import {
 })
 export class LofaszEditorComponent implements OnInit {
   lofaszForm: FormGroup;
-  selectedLofasz$: Observable<Lofasz | null | undefined>;
+  selectedLofaszId$: Observable<number | null>;
 
   constructor(
     private store: Store<AppState>,
@@ -33,14 +34,13 @@ export class LofaszEditorComponent implements OnInit {
       id: [0],
     });
 
-    this.selectedLofasz$ = this.store.pipe(
-      select(state => state.lofasz.selectedLofasz)
-    );
+    this.selectedLofaszId$ = this.store.select(state => state.lofasz.selectedLofaszId);
   }
 
   ngOnInit(): void {
-    this.selectedLofasz$.subscribe(lofasz => {
-      if (lofasz) {
+    this.selectedLofaszId$.subscribe(lofaszId => {
+      if (lofaszId) {
+        const lofasz = this.store.select(LofaszSelectors.selectSelectedLofasz());
         this.lofaszForm.patchValue(lofasz);
       } else {
         this.lofaszForm.patchValue({ name: '', isFriendly: false, id: 0 });
@@ -58,7 +58,7 @@ export class LofaszEditorComponent implements OnInit {
         this.store.dispatch(LofaszActions.createLofasz({ lofasz: lofasz }));
       }
 
-      this.store.dispatch(LofaszActions.selectLofasz({ lofasz: null }));
+      this.store.dispatch(LofaszActions.selectLofasz({ lofaszId: null }));
 
 
       this.lofaszForm.patchValue({ name: '', isFriendly: false, id: 0 });

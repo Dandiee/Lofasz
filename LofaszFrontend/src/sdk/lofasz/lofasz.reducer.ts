@@ -6,15 +6,15 @@ export const initialState: LofaszState = {
   lofaszok: [],
   isBusy: false,
   error: '',
-  selectedLofasz: null,
+  selectedLofaszId: null,
 };
 
 export const lofaszReducer = createReducer(
   initialState,
 
-  on(LofaszActions.selectLofasz, (state, { lofasz }) => ({
+  on(LofaszActions.selectLofasz, (state, { lofaszId }) => ({
     ...state,
-    selectedLofasz: lofasz,
+    selectedLofaszId: lofaszId,
   })),
 
   on(LofaszActions.getAllLofasz, state => ({ ...state, isBusy: true })),

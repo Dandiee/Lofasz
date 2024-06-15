@@ -8,7 +8,7 @@
     *ngFor="let lofasz of lofaszok$ | async"
     style="float: left; display: block; margin: 16px">
     <a
-      [class.selected-lofasz-class]="(selectedLofasz$ | async) === lofasz"
+      [class.selected-lofasz-class]="(selectedLofaszId$ | async) === lofasz.id"
       (click)="handleClick(lofasz)"
       href="#"
       >{{ lofasz.name }}</a

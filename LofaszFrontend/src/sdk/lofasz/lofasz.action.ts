@@ -7,7 +7,7 @@ export class LofaszActions {
 
   static selectLofasz = createAction(
     'Select a lofasz!',
-    props<{ lofasz: Lofasz | null }>()
+    props<{ lofaszId: number | null }>()
   );
 
   static getAllLofasz = createAction('Get all the lofasz!');

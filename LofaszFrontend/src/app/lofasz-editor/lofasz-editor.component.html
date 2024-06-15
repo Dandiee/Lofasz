@@ -1,4 +1,4 @@
-<h2>Lófasz {{ (selectedLofasz$ | async) ? 'szerkesztő' : 'kreáló' }}!</h2>
+<h2>Lófasz {{ (selectedLofaszId$ | async) ? 'szerkesztő' : 'kreáló' }}!</h2>
 
 <form [formGroup]="lofaszForm" (ngSubmit)="onSubmit()">
   <div>
