@@ -13,14 +13,11 @@
   </div>
 
   <div>
-    <label for="isFriendly">Email</label>
+    <label for="isFriendly">Is friendly</label>
     <input id="isFriendly" formControlName="isFriendly" type="checkbox" />
     <div
       *ngIf="isFriendly?.invalid && (isFriendly?.dirty || isFriendly?.touched)">
-      <div *ngIf="isFriendly?.errors?.['required']">Email is required.</div>
-      <div *ngIf="isFriendly?.errors?.['email']">
-        Email must be a valid email address.
-      </div>
+      <div *ngIf="isFriendly?.errors?.['required']">Is friendly is required.</div>
     </div>
   </div>
 
