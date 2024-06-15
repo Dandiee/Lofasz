@@ -33,7 +33,7 @@ export const lofaszReducer = createReducer(
   on(LofaszActions.getLofaszById, state => ({ ...state })),
   on(LofaszActions.getLofaszByIdSuccess, (state, { lofasz }) => ({
     ...state,
-    // aka replace the existing lofasz as we have a fresher version of it
+    // replace the existing lofasz as we have a fresher version of it
     lofaszok: state.lofaszok.map(oldLofasz =>
       oldLofasz.id === lofasz.id ? lofasz : oldLofasz
     ),
@@ -47,7 +47,7 @@ export const lofaszReducer = createReducer(
   on(LofaszActions.createLofasz, state => ({ ...state, isBusy: true })),
   on(LofaszActions.createLofaszSuccess, (state, { lofasz }) => ({
     ...state,
-    // aka add the new lofasz to the lofaszok list
+    // add the new lofasz to the lofaszok list
     lofaszok: [...state.lofaszok, lofasz],
     isBusy: false,
   })),
@@ -60,7 +60,7 @@ export const lofaszReducer = createReducer(
   on(LofaszActions.deleteLofaszById, state => ({ ...state })),
   on(LofaszActions.deleteLofaszByIdSuccess, (state, { id }) => ({
     ...state,
-    // aka add the new lofasz to the lofaszok list
+    // remove the old lofasz from the list
     lofaszok: state.lofaszok.filter(currentLofasz => currentLofasz.id !== id),
     isBusy: false,
   })),
@@ -72,7 +72,7 @@ export const lofaszReducer = createReducer(
   on(LofaszActions.updateLofasz, state => ({ ...state })),
   on(LofaszActions.updateLofaszSuccess, (state, { lofasz }) => ({
     ...state,
-    // aka replace the existing lofasz as we have a fresher version of it
+    // replace the existing lofasz as we have a fresher version of it
     lofaszok: state.lofaszok.map(oldLofasz =>
       oldLofasz.id === lofasz.id ? lofasz : oldLofasz
     ),
