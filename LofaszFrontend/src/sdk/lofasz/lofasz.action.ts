@@ -3,6 +3,9 @@ import { Lofasz } from './lofasz.model';
 import { HttpErrorResponse } from '@angular/common/http';
 
 export class LofaszActions {
+    
+  static doNothing = createAction('Do nothing at all!');
+
   static selectLofasz = createAction(
     'Select a lofasz!',
     props<{ lofasz: Lofasz | null }>()

@@ -46,8 +46,11 @@ export class LofaszEffects {
       ofType(LofaszActions.deleteLofaszById),
       mergeMap(action =>
         this.lofaszService.deleteLofaszById(action.id).pipe(
-          map(toroldLofaszId =>
-            LofaszActions.deleteLofaszByIdSuccess({ id: toroldLofaszId })
+          map(() =>
+            // TODO: SignalR takes care of the success path?
+            // how to pipe nothing on the success branch?
+            //LofaszActions.deleteLofaszByIdSuccess({ id: toroldLofaszId })
+            LofaszActions.doNothing()
           ),
           catchError(error =>
             of(LofaszActions.deleteLofaszByIdFailure({ error }))
@@ -61,10 +64,12 @@ export class LofaszEffects {
     this.actions$.pipe(
       ofType(LofaszActions.createLofasz),
       mergeMap(action =>
-        this.lofaszService.createLofasz(action.lofasz).pipe(
-          map(newLofasz =>
-            LofaszActions.createLofaszSuccess({ lofasz: newLofasz })
-          ),
+        this.lofaszService.createLofasz(action.lofasz)
+        .pipe(map(() =>
+          // TODO: SignalR takes care of the success path?
+          // how to pipe nothing on the success branch?
+          // LofaszActions.createLofaszSuccess({ lofasz: lofasz })
+          LofaszActions.doNothing()),
           catchError(error => of(LofaszActions.createLofaszFailure({ error })))
         )
       )
@@ -76,8 +81,11 @@ export class LofaszEffects {
       ofType(LofaszActions.updateLofasz),
       mergeMap(action =>
         this.lofaszService.updateLofasz(action.lofasz).pipe(
-          map(newLofasz =>
-            LofaszActions.updateLofaszSuccess({ lofasz: newLofasz })
+          map(() =>
+            // TODO: SignalR takes care of the success path?
+            // how to pipe nothing on the success branch?
+            //LofaszActions.updateLofaszSuccess({ lofasz: newLofasz })
+            LofaszActions.doNothing()
           ),
           catchError(error => of(LofaszActions.updateLofaszFailure({ error })))
         )
