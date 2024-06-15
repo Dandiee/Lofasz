@@ -23,5 +23,3 @@ export const appStore: AppStore = {
 };
 
 export const appEffects = [LofaszEffects];
-
-

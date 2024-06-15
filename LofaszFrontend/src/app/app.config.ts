@@ -1,7 +1,4 @@
-import {
-  ApplicationConfig,
-  provideZoneChangeDetection,
-} from '@angular/core';
+import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -11,6 +8,7 @@ import { LofaszService } from '../sdk/lofasz/lofasz.service';
 import { appEffects, appStore } from '../sdk/store';
 import { provideHttpClient } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LofaszSignalrService } from '../sdk/lofasz/lofasz.signalr.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -21,5 +19,6 @@ export const appConfig: ApplicationConfig = {
     provideEffects(appEffects),
     LofaszService,
     ReactiveFormsModule,
+    LofaszSignalrService,
   ],
 };

@@ -19,7 +19,7 @@ import {
   templateUrl: './lofasz-editor.component.html',
   styleUrl: './lofasz-editor.component.scss',
 })
-export class LofaszEditorComponent implements OnInit  {
+export class LofaszEditorComponent implements OnInit {
   lofaszForm: FormGroup;
   selectedLofasz$: Observable<Lofasz | null | undefined>;
 

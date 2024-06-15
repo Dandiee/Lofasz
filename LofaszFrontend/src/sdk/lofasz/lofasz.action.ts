@@ -11,7 +11,7 @@ export class LofaszActions {
   static getAllLofasz = createAction('Get all the lofasz!');
   static getAllLofaszFailure = createAction(
     'Failed at getting all the lofaszok!',
-    props<{ error: HttpErrorResponse  }>()
+    props<{ error: HttpErrorResponse }>()
   );
   static getAllLofaszSuccess = createAction(
     'Successfully getting all the lofaszok!',
@@ -24,7 +24,7 @@ export class LofaszActions {
   );
   static getLofaszByIdFailure = createAction(
     'Fail to get a specific lofasz!',
-    props<{ error: HttpErrorResponse  }>()
+    props<{ error: HttpErrorResponse }>()
   );
   static getLofaszByIdSuccess = createAction(
     'Got the lofasz by id just fine!',
@@ -37,7 +37,7 @@ export class LofaszActions {
   );
   static deleteLofaszByIdFailure = createAction(
     'Got rid of the lofasz!',
-    props<{ error: HttpErrorResponse  }>()
+    props<{ error: HttpErrorResponse }>()
   );
   static deleteLofaszByIdSuccess = createAction(
     'Delete a specific lofasz!',
@@ -50,7 +50,7 @@ export class LofaszActions {
   );
   static createLofaszFailure = createAction(
     'Failed to create a new lofasz!',
-    props<{ error: HttpErrorResponse  }>()
+    props<{ error: HttpErrorResponse }>()
   );
   static createLofaszSuccess = createAction(
     'New lofasz created!',
@@ -63,7 +63,7 @@ export class LofaszActions {
   );
   static updateLofaszFailure = createAction(
     'Failed to update an existing lofasz!',
-    props<{ error: HttpErrorResponse  }>()
+    props<{ error: HttpErrorResponse }>()
   );
   static updateLofaszSuccess = createAction(
     'Lofasz refreshed!',

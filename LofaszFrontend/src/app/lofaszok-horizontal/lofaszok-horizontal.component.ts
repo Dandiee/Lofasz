@@ -5,6 +5,7 @@ import { CommonModule, NgFor } from '@angular/common';
 import { AppState } from '../../sdk/store';
 import { Lofasz } from '../../sdk/lofasz/lofasz.model';
 import { LofaszActions } from '../../sdk/lofasz/lofasz.action';
+import { LofaszSignalrService } from '../../sdk/lofasz/lofasz.signalr.service';
 
 @Component({
   selector: 'app-lofaszok-horizontal',
@@ -16,11 +17,12 @@ import { LofaszActions } from '../../sdk/lofasz/lofasz.action';
 export class LofaszokHorizontalComponent {
   lofaszok$: Observable<Lofasz[]>;
   isBusy$: Observable<boolean>;
-  store: Store<AppState>;
   selectedLofasz$: Observable<Lofasz | null>;
 
-  constructor(store: Store<AppState>) {
-    this.store = store;
+  constructor(
+    private store: Store<AppState>,
+    private realTimeService: LofaszSignalrService
+  ) {
     this.lofaszok$ = store.select(state => state.lofasz.lofaszok);
     this.isBusy$ = store.select(state => state.lofasz.isBusy);
     this.selectedLofasz$ = store.select(state => state.lofasz.selectedLofasz);

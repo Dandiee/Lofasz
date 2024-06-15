@@ -17,7 +17,7 @@ export const lofaszReducer = createReducer(
     selectedLofasz: lofasz,
   })),
 
-  on(LofaszActions.getAllLofasz, state => ({ ...state, isBusy: true })),  
+  on(LofaszActions.getAllLofasz, state => ({ ...state, isBusy: true })),
   on(LofaszActions.getAllLofaszSuccess, (state, { lofaszok }) => ({
     ...state,
     lofaszok,
@@ -54,7 +54,7 @@ export const lofaszReducer = createReducer(
   on(LofaszActions.createLofaszFailure, (state, { error }) => ({
     ...state,
     lastErrorOrIdk: error,
-    isBusy: false
+    isBusy: false,
   })),
 
   on(LofaszActions.deleteLofaszById, state => ({ ...state })),
