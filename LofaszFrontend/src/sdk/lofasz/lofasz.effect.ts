@@ -64,12 +64,13 @@ export class LofaszEffects {
     this.actions$.pipe(
       ofType(LofaszActions.createLofasz),
       mergeMap(action =>
-        this.lofaszService.createLofasz(action.lofasz)
-        .pipe(map(() =>
-          // TODO: SignalR takes care of the success path?
-          // how to pipe nothing on the success branch?
-          // LofaszActions.createLofaszSuccess({ lofasz: lofasz })
-          LofaszActions.doNothing()),
+        this.lofaszService.createLofasz(action.lofasz).pipe(
+          map(() =>
+            // TODO: SignalR takes care of the success path?
+            // how to pipe nothing on the success branch?
+            // LofaszActions.createLofaszSuccess({ lofasz: lofasz })
+            LofaszActions.doNothing()
+          ),
           catchError(error => of(LofaszActions.createLofaszFailure({ error })))
         )
       )

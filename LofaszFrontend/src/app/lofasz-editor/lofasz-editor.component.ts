@@ -33,8 +33,6 @@ export class LofaszEditorComponent implements OnInit {
       id: [0],
     });
 
-    store.dispatch(LofaszActions.getAllLofasz());
-
     this.selectedLofasz$ = this.store.pipe(
       select(state => state.lofasz.selectedLofasz)
     );

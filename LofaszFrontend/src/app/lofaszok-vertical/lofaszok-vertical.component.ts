@@ -24,8 +24,6 @@ export class LofaszokVerticalComponent {
     this.lofaszok$ = store.select(state => state.lofasz.lofaszok);
     this.isBusy$ = store.select(state => state.lofasz.isBusy);
     this.selectedLofasz$ = store.select(state => state.lofasz.selectedLofasz);
-
-    store.dispatch(LofaszActions.getAllLofasz());
   }
 
   handleClick(lofasz: Lofasz): void {
