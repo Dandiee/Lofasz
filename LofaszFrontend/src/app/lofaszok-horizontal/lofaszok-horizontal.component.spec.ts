@@ -8,9 +8,8 @@ describe('LofaszokHorizontalComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [LofaszokHorizontalComponent]
-    })
-    .compileComponents();
+      imports: [LofaszokHorizontalComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(LofaszokHorizontalComponent);
     component = fixture.componentInstance;

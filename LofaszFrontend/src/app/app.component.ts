@@ -8,9 +8,14 @@ import { LofaszEditorComponent } from './lofasz-editor/lofasz-editor.component';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, LofaszokHorizontalComponent, LofaszokVerticalComponent, LofaszEditorComponent],
+  imports: [
+    RouterOutlet,
+    LofaszokHorizontalComponent,
+    LofaszokVerticalComponent,
+    LofaszEditorComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'LofaszFrontend';

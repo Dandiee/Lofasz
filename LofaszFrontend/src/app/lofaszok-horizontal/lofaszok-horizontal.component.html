@@ -3,12 +3,17 @@
 
 <h2>Lófaszok vertikálisan!</h2>
 
-<ul style="list-style-type: none;">
-    <li *ngFor="let lofasz of lofaszok$ | async" style="float: left; display: block; margin: 16px;">
-      <a [class.selected-lofasz-class]="(selectedLofasz$ | async) == lofasz" (click)="handleClick(lofasz)" href="#">{{ lofasz.name }}</a>
-    </li>
-  </ul>
-  
-  <p style="clear: both;"></p>
+<ul style="list-style-type: none">
+  <li
+    *ngFor="let lofasz of lofaszok$ | async"
+    style="float: left; display: block; margin: 16px">
+    <a
+      [class.selected-lofasz-class]="(selectedLofasz$ | async) == lofasz"
+      (click)="handleClick(lofasz)"
+      href="#"
+      >{{ lofasz.name }}</a
+    >
+  </li>
+</ul>
 
-
+<p style="clear: both"></p>

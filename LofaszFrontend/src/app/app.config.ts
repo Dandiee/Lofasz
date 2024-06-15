@@ -1,4 +1,8 @@
-import { ApplicationConfig, importProvidersFrom, provideZoneChangeDetection } from '@angular/core';
+import {
+  ApplicationConfig,
+  importProvidersFrom,
+  provideZoneChangeDetection,
+} from '@angular/core';
 import { RouterModule, provideRouter } from '@angular/router';
 
 import { routes } from './app.routes';
@@ -12,12 +16,12 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 export const appConfig: ApplicationConfig = {
   providers: [
-    provideZoneChangeDetection({ eventCoalescing: true }), 
-    provideRouter(routes), 
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
     provideHttpClient(),
     provideStore(appStore),
     provideEffects(appEffects),
     LofaszService,
-    ReactiveFormsModule 
-  ]
+    ReactiveFormsModule,
+  ],
 };

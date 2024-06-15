@@ -2,7 +2,12 @@
 
 <ul>
   <li *ngFor="let lofasz of lofaszok$ | async">
-    <a [class.selected-lofasz-class]="(selectedLofasz$ | async) == lofasz" (click)="handleClick(lofasz)" href="#">{{ lofasz.name }}</a>
-     - <a href="#" (click)="deleteLofasz(lofasz)">[törlés]</a>
+    <a
+      [class.selected-lofasz-class]="(selectedLofasz$ | async) == lofasz"
+      (click)="handleClick(lofasz)"
+      href="#"
+      >{{ lofasz.name }}</a
+    >
+    - <a href="#" (click)="deleteLofasz(lofasz)">[törlés]</a>
   </li>
 </ul>

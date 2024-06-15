@@ -6,71 +6,76 @@ import { CommonModule, NgFor } from '@angular/common';
 import { AppState } from '../../sdk/store';
 import { LofaszState } from '../../sdk/lofasz/lofasz.reducer';
 import { Lofasz } from '../../sdk/lofasz/lofasz.model';
-import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 
 @Component({
   selector: 'app-lofasz-editor',
   standalone: true,
   imports: [CommonModule, NgFor, ReactiveFormsModule],
   templateUrl: './lofasz-editor.component.html',
-  styleUrl: './lofasz-editor.component.scss'
+  styleUrl: './lofasz-editor.component.scss',
 })
 export class LofaszEditorComponent {
-  
   lofaszForm: FormGroup;
   selectedLofasz$: Observable<Lofasz | null | undefined>;
 
-    constructor(private store: Store<AppState>, private fb: FormBuilder) {
+  constructor(
+    private store: Store<AppState>,
+    private fb: FormBuilder
+  ) {
+    this.lofaszForm = this.fb.group({
+      name: ['', [Validators.required, Validators.minLength(3)]],
+      isFriendly: [true],
+      id: [0],
+    });
 
-      this.lofaszForm = this.fb.group({
-        name: ['', [Validators.required, Validators.minLength(3)]],
-        isFriendly: [true],
-        id: [0]
-      });
+    store.dispatch(LofaszAction.getAllLofasz());
 
-      store.dispatch(LofaszAction.getAllLofasz());
+    this.selectedLofasz$ = this.store.pipe(
+      select(state => state.lofasz.selectedLofasz)
+    );
+  }
 
-      this.selectedLofasz$ = this.store.pipe(select(state => state.lofasz.selectedLofasz));
-    }
-
-    ngOnInit(): void {
-      this.selectedLofasz$.subscribe(lofasz => {
+  ngOnInit(): void {
+    this.selectedLofasz$.subscribe(lofasz => {
       if (lofasz) {
         this.lofaszForm.patchValue(lofasz);
       } else {
-        this.lofaszForm.patchValue({ name: '', isFriendly: false, id: 0} );
+        this.lofaszForm.patchValue({ name: '', isFriendly: false, id: 0 });
       }
     });
-      
-    }
+  }
 
-    onSubmit(): void {
-       if (this.lofaszForm.valid) {
-         const lofasz: Lofasz = this.lofaszForm.value;
-         
-         if (lofasz.id) {
-          this.store.dispatch(LofaszAction.updateLofasz({lofasz: lofasz}));          
-          
-         } else{
-          this.store.dispatch(LofaszAction.createLofasz({lofasz: lofasz}));  
-         }
+  onSubmit(): void {
+    if (this.lofaszForm.valid) {
+      const lofasz: Lofasz = this.lofaszForm.value;
 
-         this.lofaszForm.patchValue({ name: '', isFriendly: false, id: 0} );
-         
-       } else {
-         console.log('Form not valid');
-       }
-    }
+      if (lofasz.id) {
+        this.store.dispatch(LofaszAction.updateLofasz({ lofasz: lofasz }));
+      } else {
+        this.store.dispatch(LofaszAction.createLofasz({ lofasz: lofasz }));
+      }
 
-    get name() {
-      return this.lofaszForm.get('name');
+      this.lofaszForm.patchValue({ name: '', isFriendly: false, id: 0 });
+    } else {
+      console.log('Form not valid');
     }
-  
-    get isFriendly() {
-      return this.lofaszForm.get('isFriendly');
-    }
-  
-    get id() {
-      return this.lofaszForm.get('id');
-    }
+  }
+
+  get name() {
+    return this.lofaszForm.get('name');
+  }
+
+  get isFriendly() {
+    return this.lofaszForm.get('isFriendly');
+  }
+
+  get id() {
+    return this.lofaszForm.get('id');
+  }
 }
