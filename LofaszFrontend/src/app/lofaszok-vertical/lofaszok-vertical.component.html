@@ -3,7 +3,7 @@
 <ul>
   <li *ngFor="let lofasz of lofaszok$ | async">
     <a
-      [class.selected-lofasz-class]="(selectedLofasz$ | async) == lofasz"
+      [class.selected-lofasz-class]="(selectedLofasz$ | async) === lofasz"
       (click)="handleClick(lofasz)"
       href="#"
       >{{ lofasz.name }}</a

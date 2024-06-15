@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
 import { Observable, first } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { LofaszAction } from '../../sdk/lofasz/lofasz.action';
+import { LofaszActions } from '../../sdk/lofasz/lofasz.action';
 import { CommonModule, NgFor } from '@angular/common';
 import { AppState } from '../../sdk/store';
-import { LofaszState } from '../../sdk/lofasz/lofasz.reducer';
 import { Lofasz } from '../../sdk/lofasz/lofasz.model';
 
 @Component({
@@ -26,7 +25,7 @@ export class LofaszokVerticalComponent {
     this.isBusy$ = store.select(state => state.lofasz.isBusy);
     this.selectedLofasz$ = store.select(state => state.lofasz.selectedLofasz);
 
-    store.dispatch(LofaszAction.getAllLofasz());
+    store.dispatch(LofaszActions.getAllLofasz());
   }
 
   handleClick(lofasz: Lofasz): void {
@@ -35,14 +34,14 @@ export class LofaszokVerticalComponent {
         currentlySelectedLofasz === null ||
         currentlySelectedLofasz != lofasz
       ) {
-        this.store.dispatch(LofaszAction.selectLofasz({ lofasz: lofasz }));
+        this.store.dispatch(LofaszActions.selectLofasz({ lofasz: lofasz }));
       } else {
-        this.store.dispatch(LofaszAction.selectLofasz({ lofasz: null }));
+        this.store.dispatch(LofaszActions.selectLofasz({ lofasz: null }));
       }
     });
   }
 
   deleteLofasz(lofasz: Lofasz): void {
-    this.store.dispatch(LofaszAction.deleteLofaszById({ id: lofasz.id }));
+    this.store.dispatch(LofaszActions.deleteLofaszById({ id: lofasz.id }));
   }
 }

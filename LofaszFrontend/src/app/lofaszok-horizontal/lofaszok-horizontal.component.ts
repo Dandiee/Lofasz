@@ -1,11 +1,10 @@
 import { Component } from '@angular/core';
-import { Observable, every, first, single, take } from 'rxjs';
+import { Observable, first } from 'rxjs';
 import { Store } from '@ngrx/store';
-import { LofaszAction } from '../../sdk/lofasz/lofasz.action';
 import { CommonModule, NgFor } from '@angular/common';
 import { AppState } from '../../sdk/store';
-import { LofaszState } from '../../sdk/lofasz/lofasz.reducer';
 import { Lofasz } from '../../sdk/lofasz/lofasz.model';
+import { LofaszActions } from '../../sdk/lofasz/lofasz.action';
 
 @Component({
   selector: 'app-lofaszok-horizontal',
@@ -26,7 +25,7 @@ export class LofaszokHorizontalComponent {
     this.isBusy$ = store.select(state => state.lofasz.isBusy);
     this.selectedLofasz$ = store.select(state => state.lofasz.selectedLofasz);
 
-    store.dispatch(LofaszAction.getAllLofasz());
+    store.dispatch(LofaszActions.getAllLofasz());
   }
 
   handleClick(lofasz: Lofasz): void {
@@ -35,9 +34,9 @@ export class LofaszokHorizontalComponent {
         currentlySelectedLofasz === null ||
         currentlySelectedLofasz != lofasz
       ) {
-        this.store.dispatch(LofaszAction.selectLofasz({ lofasz: lofasz }));
+        this.store.dispatch(LofaszActions.selectLofasz({ lofasz: lofasz }));
       } else {
-        this.store.dispatch(LofaszAction.selectLofasz({ lofasz: null }));
+        this.store.dispatch(LofaszActions.selectLofasz({ lofasz: null }));
       }
     });
   }

@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { LofaszokHorizontalComponent } from './lofaszok-horizontal/lofaszok-horizontal.component';
-import { StoreModule } from '@ngrx/store';
 import { LofaszokVerticalComponent } from './lofaszok-vertical/lofaszok-vertical.component';
 import { LofaszEditorComponent } from './lofasz-editor/lofasz-editor.component';
 

@@ -1,7 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { Lofasz } from './lofasz.model';
-import { LofaszAction } from './lofasz.action';
-import { EntityAdapter, EntityState } from '@ngrx/entity';
+import { LofaszActions } from './lofasz.action';
 
 export interface LofaszState {
   lofaszok: Lofasz[];
@@ -20,25 +19,25 @@ export const initialState: LofaszState = {
 export const lofaszReducer = createReducer(
   initialState,
 
-  on(LofaszAction.selectLofasz, (state, { lofasz }) => ({
+  on(LofaszActions.selectLofasz, (state, { lofasz }) => ({
     ...state,
     selectedLofasz: lofasz,
   })),
 
-  on(LofaszAction.getAllLofasz, state => ({ ...state, isBusy: true })),
-  on(LofaszAction.getAllLofaszSuccess, (state, { lofaszok }) => ({
+  on(LofaszActions.getAllLofasz, state => ({ ...state, isBusy: true })),
+  on(LofaszActions.getAllLofaszSuccess, (state, { lofaszok }) => ({
     ...state,
     lofaszok,
     isBusy: false,
   })),
-  on(LofaszAction.getAllLofaszFailure, (state, { error }) => ({
+  on(LofaszActions.getAllLofaszFailure, (state, { error }) => ({
     ...state,
-    error,
+    error: error.message,
     isBusy: false,
   })),
 
-  on(LofaszAction.getLofaszById, state => ({ ...state })),
-  on(LofaszAction.getLofaszByIdSuccess, (state, { lofasz }) => ({
+  on(LofaszActions.getLofaszById, state => ({ ...state })),
+  on(LofaszActions.getLofaszByIdSuccess, (state, { lofasz }) => ({
     ...state,
     // aka replace the existing lofasz as we have a fresher version of it
     lofaszok: state.lofaszok.map(oldLofasz =>
@@ -46,37 +45,37 @@ export const lofaszReducer = createReducer(
     ),
     isBusy: false,
   })),
-  on(LofaszAction.getLofaszByIdFailure, (state, { error }) => ({
+  on(LofaszActions.getLofaszByIdFailure, (state, { error }) => ({
     ...state,
     lastErrorOrIdk: error,
   })),
 
-  on(LofaszAction.createLofasz, state => ({ ...state })),
-  on(LofaszAction.createLofaszSuccess, (state, { lofasz }) => ({
+  on(LofaszActions.createLofasz, state => ({ ...state })),
+  on(LofaszActions.createLofaszSuccess, (state, { lofasz }) => ({
     ...state,
     // aka add the new lofasz to the lofaszok list
     lofaszok: [...state.lofaszok, lofasz],
     isBusy: false,
   })),
-  on(LofaszAction.createLofaszFailure, (state, { error }) => ({
+  on(LofaszActions.createLofaszFailure, (state, { error }) => ({
     ...state,
     lastErrorOrIdk: error,
   })),
 
-  on(LofaszAction.deleteLofaszById, state => ({ ...state })),
-  on(LofaszAction.deleteLofaszByIdSuccess, (state, { id }) => ({
+  on(LofaszActions.deleteLofaszById, state => ({ ...state })),
+  on(LofaszActions.deleteLofaszByIdSuccess, (state, { id }) => ({
     ...state,
     // aka add the new lofasz to the lofaszok list
     lofaszok: state.lofaszok.filter(currentLofasz => currentLofasz.id !== id),
     isBusy: false,
   })),
-  on(LofaszAction.deleteLofaszByIdFailure, (state, { error }) => ({
+  on(LofaszActions.deleteLofaszByIdFailure, (state, { error }) => ({
     ...state,
     lastErrorOrIdk: error,
   })),
 
-  on(LofaszAction.updateLofasz, state => ({ ...state })),
-  on(LofaszAction.updateLofaszSuccess, (state, { lofasz }) => ({
+  on(LofaszActions.updateLofasz, state => ({ ...state })),
+  on(LofaszActions.updateLofaszSuccess, (state, { lofasz }) => ({
     ...state,
     // aka replace the existing lofasz as we have a fresher version of it
     lofaszok: state.lofaszok.map(oldLofasz =>
@@ -84,7 +83,7 @@ export const lofaszReducer = createReducer(
     ),
     isBusy: false,
   })),
-  on(LofaszAction.updateLofaszFailure, (state, { error }) => ({
+  on(LofaszActions.updateLofaszFailure, (state, { error }) => ({
     ...state,
     lastErrorOrIdk: error,
   }))

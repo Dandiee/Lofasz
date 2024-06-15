@@ -1,10 +1,9 @@
-import { Action, createAction, props } from '@ngrx/store';
-import { Guid } from 'guid-typescript';
+import { Action } from '@ngrx/store';
 import { Injectable } from '@angular/core';
-import { Observable, of, pipe, switchMap } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { LofaszAction } from './lofasz.action';
+import { LofaszActions } from './lofasz.action';
 import { LofaszService } from './lofasz.service';
 
 @Injectable()
@@ -16,12 +15,12 @@ export class LofaszEffects {
 
   getAllLofasz$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(LofaszAction.getAllLofasz),
+      ofType(LofaszActions.getAllLofasz),
       mergeMap(() =>
         this.lofaszService.getLofaszok().pipe(
-          map(lofaszok => LofaszAction.getAllLofaszSuccess({ lofaszok })),
+          map(lofaszok => LofaszActions.getAllLofaszSuccess({ lofaszok })),
           catchError(error =>
-            of(LofaszAction.getAllLofaszFailure({ error: error.message }))
+            of(LofaszActions.getAllLofaszFailure({ error: error.message }))
           )
         )
       )
@@ -30,13 +29,13 @@ export class LofaszEffects {
 
   getLofaszById$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(LofaszAction.getLofaszById),
+      ofType(LofaszActions.getLofaszById),
       mergeMap(action =>
         this.lofaszService.getLofaszById(action.id).pipe(
           map(darabLofasz =>
-            LofaszAction.getLofaszByIdSuccess({ lofasz: darabLofasz })
+            LofaszActions.getLofaszByIdSuccess({ lofasz: darabLofasz })
           ),
-          catchError(error => of(LofaszAction.getLofaszByIdFailure({ error })))
+          catchError(error => of(LofaszActions.getLofaszByIdFailure({ error })))
         )
       )
     )
@@ -44,14 +43,14 @@ export class LofaszEffects {
 
   deleteLofaszById$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(LofaszAction.deleteLofaszById),
+      ofType(LofaszActions.deleteLofaszById),
       mergeMap(action =>
         this.lofaszService.deleteLofaszById(action.id).pipe(
           map(toroldLofaszId =>
-            LofaszAction.deleteLofaszByIdSuccess({ id: toroldLofaszId })
+            LofaszActions.deleteLofaszByIdSuccess({ id: toroldLofaszId })
           ),
           catchError(error =>
-            of(LofaszAction.deleteLofaszByIdFailure({ error }))
+            of(LofaszActions.deleteLofaszByIdFailure({ error }))
           )
         )
       )
@@ -60,13 +59,13 @@ export class LofaszEffects {
 
   createLofasz$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(LofaszAction.createLofasz),
+      ofType(LofaszActions.createLofasz),
       mergeMap(action =>
         this.lofaszService.createLofasz(action.lofasz).pipe(
           map(newLofasz =>
-            LofaszAction.createLofaszSuccess({ lofasz: newLofasz })
+            LofaszActions.createLofaszSuccess({ lofasz: newLofasz })
           ),
-          catchError(error => of(LofaszAction.createLofaszFailure({ error })))
+          catchError(error => of(LofaszActions.createLofaszFailure({ error })))
         )
       )
     )
@@ -74,13 +73,13 @@ export class LofaszEffects {
 
   updateLofasz$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
-      ofType(LofaszAction.updateLofasz),
+      ofType(LofaszActions.updateLofasz),
       mergeMap(action =>
         this.lofaszService.updateLofasz(action.lofasz).pipe(
           map(newLofasz =>
-            LofaszAction.updateLofaszSuccess({ lofasz: newLofasz })
+            LofaszActions.updateLofaszSuccess({ lofasz: newLofasz })
           ),
-          catchError(error => of(LofaszAction.updateLofaszFailure({ error })))
+          catchError(error => of(LofaszActions.updateLofaszFailure({ error })))
         )
       )
     )

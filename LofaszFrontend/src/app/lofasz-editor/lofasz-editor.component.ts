@@ -1,10 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { LofaszAction } from '../../sdk/lofasz/lofasz.action';
+import { LofaszActions } from '../../sdk/lofasz/lofasz.action';
 import { CommonModule, NgFor } from '@angular/common';
 import { AppState } from '../../sdk/store';
-import { LofaszState } from '../../sdk/lofasz/lofasz.reducer';
 import { Lofasz } from '../../sdk/lofasz/lofasz.model';
 import {
   FormBuilder,
@@ -20,7 +19,7 @@ import {
   templateUrl: './lofasz-editor.component.html',
   styleUrl: './lofasz-editor.component.scss',
 })
-export class LofaszEditorComponent {
+export class LofaszEditorComponent implements OnInit  {
   lofaszForm: FormGroup;
   selectedLofasz$: Observable<Lofasz | null | undefined>;
 
@@ -34,7 +33,7 @@ export class LofaszEditorComponent {
       id: [0],
     });
 
-    store.dispatch(LofaszAction.getAllLofasz());
+    store.dispatch(LofaszActions.getAllLofasz());
 
     this.selectedLofasz$ = this.store.pipe(
       select(state => state.lofasz.selectedLofasz)
@@ -56,9 +55,9 @@ export class LofaszEditorComponent {
       const lofasz: Lofasz = this.lofaszForm.value;
 
       if (lofasz.id) {
-        this.store.dispatch(LofaszAction.updateLofasz({ lofasz: lofasz }));
+        this.store.dispatch(LofaszActions.updateLofasz({ lofasz: lofasz }));
       } else {
-        this.store.dispatch(LofaszAction.createLofasz({ lofasz: lofasz }));
+        this.store.dispatch(LofaszActions.createLofasz({ lofasz: lofasz }));
       }
 
       this.lofaszForm.patchValue({ name: '', isFriendly: false, id: 0 });

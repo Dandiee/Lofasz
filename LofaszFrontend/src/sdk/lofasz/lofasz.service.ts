@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Lofasz } from './lofasz.model';
-import { Observable, delay, of } from 'rxjs';
-import { Guid } from 'guid-typescript';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',

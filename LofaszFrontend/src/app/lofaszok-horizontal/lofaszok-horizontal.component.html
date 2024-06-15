@@ -1,4 +1,4 @@
-<h1 *ngIf="!(isBusy$ | async)">Már be is töltöttek a lófaszok!</h1>
+<h1 *ngIf="(isBusy$ | async) === false">Már be is töltöttek a lófaszok!</h1>
 <h1 *ngIf="isBusy$ | async">Most töltenek a lófaszok!</h1>
 
 <h2>Lófaszok vertikálisan!</h2>
@@ -8,7 +8,7 @@
     *ngFor="let lofasz of lofaszok$ | async"
     style="float: left; display: block; margin: 16px">
     <a
-      [class.selected-lofasz-class]="(selectedLofasz$ | async) == lofasz"
+      [class.selected-lofasz-class]="(selectedLofasz$ | async) === lofasz"
       (click)="handleClick(lofasz)"
       href="#"
       >{{ lofasz.name }}</a

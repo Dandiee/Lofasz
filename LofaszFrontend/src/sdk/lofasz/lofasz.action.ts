@@ -1,71 +1,71 @@
 import { createAction, props } from '@ngrx/store';
-import { Guid } from 'guid-typescript';
 import { Lofasz } from './lofasz.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
-export namespace LofaszAction {
-  export const selectLofasz = createAction(
+export class LofaszActions {
+  static selectLofasz = createAction(
     'Select a lofasz!',
     props<{ lofasz: Lofasz | null }>()
   );
 
-  export const getAllLofasz = createAction('Get all the lofasz!');
-  export const getAllLofaszFailure = createAction(
+  static getAllLofasz = createAction('Get all the lofasz!');
+  static getAllLofaszFailure = createAction(
     'Failed at getting all the lofaszok!',
-    props<{ error: any }>()
+    props<{ error: HttpErrorResponse  }>()
   );
-  export const getAllLofaszSuccess = createAction(
+  static getAllLofaszSuccess = createAction(
     'Successfully getting all the lofaszok!',
     props<{ lofaszok: Lofasz[] }>()
   );
 
-  export const getLofaszById = createAction(
+  static getLofaszById = createAction(
     'Get a specific lofasz!',
     props<{ id: number }>()
   );
-  export const getLofaszByIdFailure = createAction(
+  static getLofaszByIdFailure = createAction(
     'Fail to get a specific lofasz!',
-    props<{ error: any }>()
+    props<{ error: HttpErrorResponse  }>()
   );
-  export const getLofaszByIdSuccess = createAction(
+  static getLofaszByIdSuccess = createAction(
     'Got the lofasz by id just fine!',
     props<{ lofasz: Lofasz }>()
   );
 
-  export const deleteLofaszById = createAction(
+  static deleteLofaszById = createAction(
     'Delete a specific lofasz!',
     props<{ id: number }>()
   );
-  export const deleteLofaszByIdFailure = createAction(
+  static deleteLofaszByIdFailure = createAction(
     'Got rid of the lofasz!',
-    props<{ error: any }>()
+    props<{ error: HttpErrorResponse  }>()
   );
-  export const deleteLofaszByIdSuccess = createAction(
+  static deleteLofaszByIdSuccess = createAction(
     'Delete a specific lofasz!',
     props<{ id: number }>()
   );
 
-  export const createLofasz = createAction(
+  static createLofasz = createAction(
     'Create a brand new lofasz!',
     props<{ lofasz: Lofasz }>()
   );
-  export const createLofaszFailure = createAction(
+  static createLofaszFailure = createAction(
     'Failed to create a new lofasz!',
-    props<{ error: any }>()
+    props<{ error: HttpErrorResponse  }>()
   );
-  export const createLofaszSuccess = createAction(
+  static createLofaszSuccess = createAction(
     'New lofasz created!',
     props<{ lofasz: Lofasz }>()
   );
 
-  export const updateLofasz = createAction(
+  static updateLofasz = createAction(
     'Update an existing lofasz!',
     props<{ lofasz: Lofasz }>()
   );
-  export const updateLofaszFailure = createAction(
+  static updateLofaszFailure = createAction(
     'Failed to update an existing lofasz!',
-    props<{ error: any }>()
+    props<{ error: HttpErrorResponse  }>()
   );
-  export const updateLofaszSuccess = createAction(
+  static updateLofaszSuccess = createAction(
     'Lofasz refreshed!',
     props<{ lofasz: Lofasz }>()
   );
