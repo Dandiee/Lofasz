@@ -58,6 +58,9 @@ export class LofaszEditorComponent implements OnInit {
         this.store.dispatch(LofaszActions.createLofasz({ lofasz: lofasz }));
       }
 
+      this.store.dispatch(LofaszActions.selectLofasz({ lofasz: null }));
+
+
       this.lofaszForm.patchValue({ name: '', isFriendly: false, id: 0 });
     } else {
       console.log('Form not valid');
