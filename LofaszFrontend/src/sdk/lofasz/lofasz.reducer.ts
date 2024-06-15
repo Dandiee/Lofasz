@@ -1,13 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
-import { Lofasz } from './lofasz.model';
 import { LofaszActions } from './lofasz.action';
-
-export interface LofaszState {
-  lofaszok: Lofasz[];
-  isBusy: boolean;
-  error: string;
-  selectedLofasz: Lofasz | null;
-}
+import { LofaszState } from '../store';
 
 export const initialState: LofaszState = {
   lofaszok: [],
@@ -24,7 +17,7 @@ export const lofaszReducer = createReducer(
     selectedLofasz: lofasz,
   })),
 
-  on(LofaszActions.getAllLofasz, state => ({ ...state, isBusy: true })),
+  on(LofaszActions.getAllLofasz, state => ({ ...state, isBusy: true })),  
   on(LofaszActions.getAllLofaszSuccess, (state, { lofaszok }) => ({
     ...state,
     lofaszok,
@@ -33,6 +26,7 @@ export const lofaszReducer = createReducer(
   on(LofaszActions.getAllLofaszFailure, (state, { error }) => ({
     ...state,
     error: error.message,
+    lofaszok: [], // cry me a river
     isBusy: false,
   })),
 
@@ -50,7 +44,7 @@ export const lofaszReducer = createReducer(
     lastErrorOrIdk: error,
   })),
 
-  on(LofaszActions.createLofasz, state => ({ ...state })),
+  on(LofaszActions.createLofasz, state => ({ ...state, isBusy: true })),
   on(LofaszActions.createLofaszSuccess, (state, { lofasz }) => ({
     ...state,
     // aka add the new lofasz to the lofaszok list
@@ -60,6 +54,7 @@ export const lofaszReducer = createReducer(
   on(LofaszActions.createLofaszFailure, (state, { error }) => ({
     ...state,
     lastErrorOrIdk: error,
+    isBusy: false
   })),
 
   on(LofaszActions.deleteLofaszById, state => ({ ...state })),

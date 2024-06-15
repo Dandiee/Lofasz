@@ -1,13 +1,21 @@
 import { Action, ActionReducer } from '@ngrx/store';
-import { LofaszState, lofaszReducer } from './lofasz/lofasz.reducer';
+import { lofaszReducer } from './lofasz/lofasz.reducer';
 import { LofaszEffects } from './lofasz/lofasz.effect';
+import { Lofasz } from './lofasz/lofasz.model';
+
+export interface AppStore {
+  lofasz: ActionReducer<LofaszState, Action>;
+}
 
 export interface AppState {
   lofasz: LofaszState;
 }
 
-export interface AppStore {
-  lofasz: ActionReducer<LofaszState, Action>;
+export interface LofaszState {
+  lofaszok: Lofasz[];
+  isBusy: boolean;
+  error: string;
+  selectedLofasz: Lofasz | null;
 }
 
 export const appStore: AppStore = {
@@ -15,3 +23,5 @@ export const appStore: AppStore = {
 };
 
 export const appEffects = [LofaszEffects];
+
+
