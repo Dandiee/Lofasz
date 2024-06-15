@@ -1,0 +1,6 @@
+@LofaszokBackend_HostAddress = http://localhost:5167
+
+GET {{LofaszokBackend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
